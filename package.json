@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "aplicación de finanzas personales",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo 'test cytla'"
+    "start": "node app.js"
   },
-  "main": "index.js",
+  "main": "app.js",
   "author": "Integradora",
   "license": "MIT",
   "dependencies": {

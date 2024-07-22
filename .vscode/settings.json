@@ -1,0 +1,9 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/9fc29238-3d4b-40d7-97b6-7e7ace91a130/resourceGroups/integradora/providers/Microsoft.Web/sites/coincontrolapi",
+    "appService.deploySubpath": ".",
+    "liveServer.settings.port": 5506
+}

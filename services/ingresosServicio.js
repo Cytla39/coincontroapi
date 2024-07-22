@@ -17,10 +17,14 @@ async function obtenerIngresosPorId(id) {
     );
 
 
-    return {
-        result
+    const data = result[0];
+    const day = data.ingreso_fecha.getDate();
+    const month = data.ingreso_fecha.getMonth() + 1;
+    const formattedDate = `${data.ingreso_fecha.getFullYear()}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
 
-    }
+    data.ingreso_fecha = formattedDate;
+
+    return data;
 }
 
 async function agregar(ingreso) {
@@ -33,8 +37,30 @@ async function agregar(ingreso) {
     }
 }
 
+async function eliminar(id) {
+    const [result] = await db.execute(`DELETE FROM ingresos WHERE ingreso_id=?`,
+        [id]
+    );
+
+    return {
+        result
+    }
+}
+
+async function actualizar(ingreso) {
+    const [result] = await db.execute(`UPDATE ingresos SET ingreso_monto=?, ingreso_fecha=?, ingreso_categoria=?, ingreso_concepto=?, periodo_id=? WHERE ingreso_id=? AND usuario_id=?`,
+        [ingreso.monto, ingreso.fecha, ingreso.categoria, ingreso.concepto, ingreso.periodoId, ingreso.ingresoId, ingreso.usuarioId]
+    );
+
+    return {
+        result
+    }
+}
+
 module.exports = {
     obtenerIngresos: obtenerIngresos ,
     obtenerIngresosPorId: obtenerIngresosPorId,
-    agregar:agregar
+    agregar:agregar,
+    eliminar:eliminar,
+    actualizar: actualizar
 }
